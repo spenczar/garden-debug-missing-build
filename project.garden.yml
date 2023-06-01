@@ -1,0 +1,17 @@
+apiVersion: garden.io/v1
+kind: Project
+name: vote-demo-quickstart
+defaultEnvironment: local
+dotIgnoreFile: .gitignore
+
+environments:
+  - name: local
+    defaultNamespace: default
+    variables:
+      base-hostname: local.demo.garden
+providers:
+  - name: local-kubernetes
+    environments: [local]
+    namespace: ${environment.namespace}
+    defaultHostname: ${var.base-hostname}
+
