@@ -1,0 +1,24 @@
+kind: Build
+type: container
+name: bugdemo-image
+description: Apache2 web server image
+source:
+  repository:
+    url: git@github.com:spenczar/garden-debug-missing-build-sourcerepo#main
+
+---
+
+kind: Deploy
+name: bugdemo-deploy
+type: helm
+source:
+  repository:
+    url: git@github.com:spenczar/garden-debug-missing-build-sourcerepo#main
+
+build: bugdemo-image
+dependencies:
+  - build.bugdemo-image
+
+spec:
+  chart:
+    path: ./chart
